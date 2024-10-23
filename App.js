@@ -1,33 +1,41 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
+import Login from './pages/Login';
 
 export default function App() {
   const [mood, setMood] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <View style={styles.appContainer}>
-      <Pressable
-        style={{
-          ...styles.pressable,
-          backgroundColor: mood === 'Exhausted' ? 'green' : 'white',
-        }}
-        onPress={() => {
-          setMood('Exhausted');
-        }}
-      >
-        <Text style={styles.text}>Exhausted</Text>
-      </Pressable>
-      <Pressable
-        style={{
-          ...styles.pressable,
-          backgroundColor: mood === 'Nauseous' ? 'green' : 'white',
-        }}
-        onPress={() => {
-          setMood('Nauseous');
-        }}
-      >
-        <Text style={styles.text}>Nauseous</Text>
-      </Pressable>
+      {!isLoggedIn ? (
+        <Login />
+      ) : (
+        <>
+          <Pressable
+            style={{
+              ...styles.pressable,
+              backgroundColor: mood === 'Exhausted' ? 'green' : 'white',
+            }}
+            onPress={() => {
+              setMood('Exhausted');
+            }}
+          >
+            <Text style={styles.text}>Exhausted</Text>
+          </Pressable>
+          <Pressable
+            style={{
+              ...styles.pressable,
+              backgroundColor: mood === 'Nauseous' ? 'green' : 'white',
+            }}
+            onPress={() => {
+              setMood('Nauseous');
+            }}
+          >
+            <Text style={styles.text}>Nauseous</Text>
+          </Pressable>
+        </>
+      )}
     </View>
   );
 }
